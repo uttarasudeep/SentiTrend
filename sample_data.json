@@ -1,0 +1,353 @@
+
+[
+  {
+    "id": "sample001",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "This new AI technology is amazing!",
+    "created_utc": "2026-10-19T10:00:00Z"
+  },
+  {
+    "id": "sample002",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "AI tools are getting worse and more frustrating.",
+    "created_utc": "2026-10-19T10:01:00Z"
+  },
+  {
+    "id": "sample003",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "The new game launches tomorrow.",
+    "created_utc": "2026-10-19T10:02:00Z"
+  },
+  {
+    "id": "sample004",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "I love how much time this AI tool saves me.",
+    "created_utc": "2026-10-19T10:03:00Z"
+  },
+  {
+    "id": "sample005",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "This game is terrible and full of bugs.",
+    "created_utc": "2026-10-19T10:04:00Z"
+  },
+  {
+    "id": "sample006",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "AI assistants are becoming genuinely useful for everyday tasks.",
+    "created_utc": "2026-10-19T10:05:00Z"
+  },
+  {
+    "id": "sample007",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "The latest update completely ruined the gameplay.",
+    "created_utc": "2026-10-19T10:06:00Z"
+  },
+  {
+    "id": "sample008",
+    "topic": "AI",
+    "subreddit": "artificial",
+    "text": "Machine learning is fascinating and has so much potential.",
+    "created_utc": "2026-10-19T10:07:00Z"
+  },
+  {
+    "id": "sample009",
+    "topic": "Gaming",
+    "subreddit": "pcgaming",
+    "text": "The graphics in this game are absolutely beautiful.",
+    "created_utc": "2026-10-19T10:08:00Z"
+  },
+  {
+    "id": "sample010",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "I am worried that AI will replace too many jobs.",
+    "created_utc": "2026-10-19T10:09:00Z"
+  },
+  {
+    "id": "sample011",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "I had an amazing time playing with my friends.",
+    "created_utc": "2026-10-19T10:10:00Z"
+  },
+  {
+    "id": "sample012",
+    "topic": "AI",
+    "subreddit": "artificial",
+    "text": "The model keeps giving incorrect answers and wasting my time.",
+    "created_utc": "2026-10-19T10:11:00Z"
+  },
+  {
+    "id": "sample013",
+    "topic": "Gaming",
+    "subreddit": "pcgaming",
+    "text": "The developers have done an excellent job with optimization.",
+    "created_utc": "2026-10-19T10:12:00Z"
+  },
+  {
+    "id": "sample014",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "AI is changing the way people work and learn.",
+    "created_utc": "2026-10-19T10:13:00Z"
+  },
+  {
+    "id": "sample015",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "The servers are awful and disconnect every few minutes.",
+    "created_utc": "2026-10-19T10:14:00Z"
+  },
+  {
+    "id": "sample016",
+    "topic": "AI",
+    "subreddit": "artificial",
+    "text": "I am impressed by how accurately this tool summarizes documents.",
+    "created_utc": "2026-10-19T10:15:00Z"
+  },
+  {
+    "id": "sample017",
+    "topic": "Gaming",
+    "subreddit": "pcgaming",
+    "text": "The controls feel clunky and the combat is boring.",
+    "created_utc": "2026-10-19T10:16:00Z"
+  },
+  {
+    "id": "sample018",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "I am still learning how to use these AI tools.",
+    "created_utc": "2026-10-19T10:17:00Z"
+  },
+  {
+    "id": "sample019",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "This is one of the best games I have played in years.",
+    "created_utc": "2026-10-19T10:18:00Z"
+  },
+  {
+    "id": "sample020",
+    "topic": "AI",
+    "subreddit": "artificial",
+    "text": "The subscription is too expensive for what it offers.",
+    "created_utc": "2026-10-19T10:19:00Z"
+  },
+  {
+    "id": "sample021",
+    "topic": "Gaming",
+    "subreddit": "pcgaming",
+    "text": "The new patch fixed most of the problems I had.",
+    "created_utc": "2026-10-19T10:20:00Z"
+  },
+  {
+    "id": "sample022",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "Generative AI makes brainstorming much easier.",
+    "created_utc": "2026-10-19T10:21:00Z"
+  },
+  {
+    "id": "sample023",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "I regret buying this game at full price.",
+    "created_utc": "2026-10-19T10:22:00Z"
+  },
+  {
+    "id": "sample024",
+    "topic": "AI",
+    "subreddit": "artificial",
+    "text": "There are both benefits and risks to using AI.",
+    "created_utc": "2026-10-19T10:23:00Z"
+  },
+  {
+    "id": "sample025",
+    "topic": "Gaming",
+    "subreddit": "pcgaming",
+    "text": "The soundtrack is fantastic and makes every mission exciting.",
+    "created_utc": "2026-10-19T10:24:00Z"
+  },
+  {
+    "id": "sample026",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "AI-generated content sometimes feels repetitive and generic.",
+    "created_utc": "2026-10-19T10:25:00Z"
+  },
+  {
+    "id": "sample027",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "I am enjoying the story so far.",
+    "created_utc": "2026-10-19T10:26:00Z"
+  },
+  {
+    "id": "sample028",
+    "topic": "AI",
+    "subreddit": "artificial",
+    "text": "The responses are inconsistent and difficult to trust.",
+    "created_utc": "2026-10-19T10:27:00Z"
+  },
+  {
+    "id": "sample029",
+    "topic": "Gaming",
+    "subreddit": "pcgaming",
+    "text": "The game runs smoothly on my computer.",
+    "created_utc": "2026-10-19T10:28:00Z"
+  },
+  {
+    "id": "sample030",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "I do not see much difference between this model and the previous one.",
+    "created_utc": "2026-10-19T10:29:00Z"
+  },
+  {
+    "id": "sample031",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "The matchmaking system is broken and unfair.",
+    "created_utc": "2026-10-19T10:30:00Z"
+  },
+  {
+    "id": "sample032",
+    "topic": "AI",
+    "subreddit": "artificial",
+    "text": "This AI assistant helped me understand a difficult topic.",
+    "created_utc": "2026-10-19T10:31:00Z"
+  },
+  {
+    "id": "sample033",
+    "topic": "Gaming",
+    "subreddit": "pcgaming",
+    "text": "The game is okay, but nothing particularly stands out.",
+    "created_utc": "2026-10-19T10:32:00Z"
+  },
+  {
+    "id": "sample034",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "I hate how confidently AI can make things up.",
+    "created_utc": "2026-10-19T10:33:00Z"
+  },
+  {
+    "id": "sample035",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "Playing this game after work is a great way to relax.",
+    "created_utc": "2026-10-19T10:34:00Z"
+  },
+  {
+    "id": "sample036",
+    "topic": "AI",
+    "subreddit": "artificial",
+    "text": "The new features look promising, but I have not tested them yet.",
+    "created_utc": "2026-10-19T10:35:00Z"
+  },
+  {
+    "id": "sample037",
+    "topic": "Gaming",
+    "subreddit": "pcgaming",
+    "text": "Frequent crashes make this game almost impossible to enjoy.",
+    "created_utc": "2026-10-19T10:36:00Z"
+  },
+  {
+    "id": "sample038",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "Automation can save time when it is used responsibly.",
+    "created_utc": "2026-10-19T10:37:00Z"
+  },
+  {
+    "id": "sample039",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "I am disappointed by how little content the game has.",
+    "created_utc": "2026-10-19T10:38:00Z"
+  },
+  {
+    "id": "sample040",
+    "topic": "AI",
+    "subreddit": "artificial",
+    "text": "The technology is interesting, and I want to learn more about it.",
+    "created_utc": "2026-10-19T10:39:00Z"
+  },
+  {
+    "id": "sample041",
+    "topic": "Gaming",
+    "subreddit": "pcgaming",
+    "text": "The developers deserve praise for listening to community feedback.",
+    "created_utc": "2026-10-19T10:40:00Z"
+  },
+  {
+    "id": "sample042",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "AI tools are useful, but their results still need checking.",
+    "created_utc": "2026-10-19T10:41:00Z"
+  },
+  {
+    "id": "sample043",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "The tutorial explains the basic mechanics.",
+    "created_utc": "2026-10-19T10:42:00Z"
+  },
+  {
+    "id": "sample044",
+    "topic": "AI",
+    "subreddit": "artificial",
+    "text": "This update is frustrating because it removed features I relied on.",
+    "created_utc": "2026-10-19T10:43:00Z"
+  },
+  {
+    "id": "sample045",
+    "topic": "Gaming",
+    "subreddit": "pcgaming",
+    "text": "I absolutely love the art style and world design.",
+    "created_utc": "2026-10-19T10:44:00Z"
+  },
+  {
+    "id": "sample046",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "I am not sure whether AI will improve my productivity.",
+    "created_utc": "2026-10-19T10:45:00Z"
+  },
+  {
+    "id": "sample047",
+    "topic": "Gaming",
+    "subreddit": "gaming",
+    "text": "The controls are responsive and the gameplay feels excellent.",
+    "created_utc": "2026-10-19T10:46:00Z"
+  },
+  {
+    "id": "sample048",
+    "topic": "AI",
+    "subreddit": "artificial",
+    "text": "I find these tools confusing and difficult to get started with.",
+    "created_utc": "2026-10-19T10:47:00Z"
+  },
+  {
+    "id": "sample049",
+    "topic": "Gaming",
+    "subreddit": "pcgaming",
+    "text": "The game has a few bugs, but overall I am having fun.",
+    "created_utc": "2026-10-19T10:48:00Z"
+  },
+  {
+    "id": "sample050",
+    "topic": "AI",
+    "subreddit": "technology",
+    "text": "AI is a useful tool when people understand its limitations.",
+    "created_utc": "2026-10-19T10:49:00Z"
+  }
+]
