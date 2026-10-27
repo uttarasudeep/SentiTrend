@@ -3,3 +3,15 @@
 __pycache__/
 *.pyc
 .env
+
+# Generated runtime files
+/checkpoints/
+/data/processed_posts.jsonl
+/data/processed_posts.tmp
+/spark_streaming.py.bak
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
