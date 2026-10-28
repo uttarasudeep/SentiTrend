@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, Clock, ExternalLink, Inbox } from 'lucide-react';
+import { ChevronDown, ChevronUp, Clock, Inbox } from 'lucide-react';
 
 export default function RecentPostsFeed({ posts, loading, totalFiltered }) {
   const [expandedId, setExpandedId] = useState(null);
@@ -12,20 +12,20 @@ export default function RecentPostsFeed({ posts, loading, totalFiltered }) {
     switch (sentiment?.toLowerCase()) {
       case 'positive':
         return {
-          dot: 'bg-emerald-600',
-          badge: 'text-emerald-700 bg-emerald-50 border-emerald-200',
+          dot: 'bg-[#1F9D72]',
+          badge: 'text-[#176B5B] bg-[#DCEDE6] border-[#C1DFD3]',
           label: 'POSITIVE',
         };
       case 'negative':
         return {
-          dot: 'bg-red-600',
-          badge: 'text-red-700 bg-red-50 border-red-200',
+          dot: 'bg-[#D95757]',
+          badge: 'text-[#D95757] bg-[#FCE8E8] border-[#F7C5C5]',
           label: 'NEGATIVE',
         };
       default:
         return {
-          dot: 'bg-slate-500',
-          badge: 'text-slate-700 bg-slate-100 border-slate-200',
+          dot: 'bg-[#7A8793]',
+          badge: 'text-[#55635E] bg-[#E6EBE8] border-[#D2DDD7]',
           label: 'NEUTRAL',
         };
     }
@@ -52,10 +52,10 @@ export default function RecentPostsFeed({ posts, loading, totalFiltered }) {
 
   if (!loading && (!posts || posts.length === 0)) {
     return (
-      <div className="bg-white border border-slate-200 rounded-lg p-12 text-center shadow-xs">
-        <Inbox className="w-10 h-10 text-slate-300 mx-auto mb-2" />
-        <h3 className="text-sm font-bold text-slate-800">No matching posts found</h3>
-        <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
+      <div className="bg-[#F7F8F2] border border-[#D8E2D9] rounded-xl p-12 text-center shadow-xs">
+        <Inbox className="w-10 h-10 text-[#68756F]/50 mx-auto mb-2" />
+        <h3 className="text-sm font-bold text-[#26332F]">No matching posts found</h3>
+        <p className="text-xs text-[#68756F] mt-1 max-w-sm mx-auto">
           No records match the current sentiment or topic filters in the active stream buffer.
         </p>
       </div>
@@ -63,24 +63,24 @@ export default function RecentPostsFeed({ posts, loading, totalFiltered }) {
   }
 
   return (
-    <div className="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+    <div className="bg-[#F7F8F2] border border-[#D8E2D9] rounded-xl shadow-xs overflow-hidden">
       {/* Header bar */}
-      <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+      <div className="px-5 py-4 border-b border-[#E4ECE5] flex items-center justify-between">
         <div>
-          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+          <div className="text-[10px] font-bold text-[#68756F] uppercase tracking-wider">
             Live Stream Wire
           </div>
-          <h2 className="text-base font-bold text-slate-900 tracking-tight">
+          <h2 className="text-base font-bold text-[#26332F] tracking-tight">
             Recent Intelligence Feed
           </h2>
         </div>
-        <div className="text-xs text-slate-500 font-mono">
-          Showing <span className="font-bold text-slate-800">{posts.length}</span> of {totalFiltered}
+        <div className="text-xs text-[#68756F] font-mono">
+          Showing <span className="font-bold text-[#26332F]">{posts.length}</span> of {totalFiltered}
         </div>
       </div>
 
       {/* Intelligence Feed / Wire list */}
-      <div className="divide-y divide-slate-100">
+      <div className="divide-y divide-[#E4ECE5]">
         {posts.map((post) => {
           const isExpanded = expandedId === post.id;
           const config = getSentimentDot(post.sentiment);
@@ -89,37 +89,37 @@ export default function RecentPostsFeed({ posts, loading, totalFiltered }) {
           return (
             <article
               key={post.id || Math.random()}
-              className="p-4 sm:p-5 hover:bg-slate-50/70 transition-colors"
+              className="p-4 sm:p-5 hover:bg-[#EEF3EE]/60 transition-colors"
             >
-              {/* Top metadata line: Sentiment dot + Label + Topic + Timestamp + Score */}
+              {/* Top metadata line */}
               <div className="flex flex-wrap items-center justify-between gap-2 mb-2 text-xs">
                 <div className="flex items-center space-x-2">
                   <span className={`w-2 h-2 rounded-full ${config.dot}`} />
                   <span
-                    className={`px-1.5 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase border ${config.badge}`}
+                    className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase border ${config.badge}`}
                   >
                     {config.label}
                   </span>
-                  <span className="text-slate-300">·</span>
-                  <span className="font-semibold text-slate-700 uppercase tracking-tight text-[11px]">
+                  <span className="text-[#A2B3A8]">·</span>
+                  <span className="font-bold text-[#26332F] uppercase tracking-tight text-[11px]">
                     #{post.topic || 'general'}
                   </span>
-                  <span className="text-slate-300">·</span>
-                  <span className="text-slate-400 text-[11px] flex items-center space-x-1">
-                    <Clock className="w-3 h-3 text-slate-400 inline" />
+                  <span className="text-[#A2B3A8]">·</span>
+                  <span className="text-[#68756F] text-[11px] font-medium flex items-center space-x-1">
+                    <Clock className="w-3 h-3 text-[#68756F] inline" />
                     <span>{formatTime(post.created_utc || post.collected_utc)}</span>
                   </span>
                 </div>
 
                 <div className="flex items-center space-x-2 font-mono text-[11px]">
-                  <span className="text-slate-400">VADER Score:</span>
+                  <span className="text-[#68756F]">VADER Score:</span>
                   <span
-                    className={`font-semibold ${
+                    className={`font-bold ${
                       post.compound_score >= 0.05
-                        ? 'text-emerald-700'
+                        ? 'text-[#1F9D72]'
                         : post.compound_score <= -0.05
-                        ? 'text-red-700'
-                        : 'text-slate-600'
+                        ? 'text-[#D95757]'
+                        : 'text-[#68756F]'
                     }`}
                   >
                     {formatScore(post.compound_score)}
@@ -129,7 +129,7 @@ export default function RecentPostsFeed({ posts, loading, totalFiltered }) {
 
               {/* Post Text */}
               <p
-                className={`text-slate-900 text-sm leading-relaxed ${
+                className={`text-[#26332F] text-sm leading-relaxed font-normal ${
                   !isExpanded ? 'line-clamp-2' : ''
                 }`}
               >
@@ -141,7 +141,7 @@ export default function RecentPostsFeed({ posts, loading, totalFiltered }) {
                 {isLong ? (
                   <button
                     onClick={() => toggleExpand(post.id)}
-                    className="inline-flex items-center space-x-1 text-teal-700 hover:text-teal-900 font-semibold text-[11px] focus:outline-none"
+                    className="inline-flex items-center space-x-1 text-[#176B5B] hover:text-[#13594B] font-bold text-[11px] focus:outline-none"
                   >
                     <span>{isExpanded ? 'Show less' : 'Read full post'}</span>
                     {isExpanded ? (
@@ -154,12 +154,12 @@ export default function RecentPostsFeed({ posts, loading, totalFiltered }) {
                   <div />
                 )}
 
-                <div className="flex items-center space-x-2 text-[11px] text-slate-400">
-                  <span className="uppercase tracking-wider font-medium">
+                <div className="flex items-center space-x-2 text-[11px] text-[#68756F]">
+                  <span className="uppercase tracking-wider font-semibold">
                     Platform: {post.platform || 'Bluesky'}
                   </span>
                   {post.id && (
-                    <span className="font-mono text-[10px] text-slate-400 hidden sm:inline">
+                    <span className="font-mono text-[10px] text-[#68756F]/80 hidden sm:inline">
                       ID: {post.id.slice(0, 16)}...
                     </span>
                   )}

@@ -192,7 +192,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex font-sans antialiased">
+    <div className="min-h-screen bg-[#EEF3EE] text-[#26332F] flex font-sans antialiased">
       {/* Left Navigation Sidebar */}
       <Sidebar
         activeTab={activeTab}
@@ -319,12 +319,12 @@ export default function App() {
         </main>
 
         {/* Minimal Editorial Footer */}
-        <footer className="mt-auto border-t border-slate-200 bg-white py-4 px-6 text-xs text-slate-500">
+        <footer className="mt-auto border-t border-[#D8E2D9] bg-[#DCE7DF]/60 py-4 px-6 text-xs text-[#68756F]">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
             <div>
-              <span className="font-semibold text-slate-800">SentiTrend</span> &bull; Editorial Social Intelligence Dashboard
+              <span className="font-bold text-[#26332F]">SentiTrend</span> &bull; Editorial Social Intelligence Dashboard
             </div>
-            <div className="text-[11px] text-slate-400 font-mono">
+            <div className="text-[11px] text-[#68756F] font-mono">
               Pipeline: Bluesky &rarr; Kafka &rarr; Spark Streaming &rarr; VADER &rarr; HBase
             </div>
           </div>

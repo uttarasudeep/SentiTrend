@@ -6,30 +6,37 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+      },
       colors: {
-        editorial: {
-          bg: '#f8fafc',
-          card: '#ffffff',
-          surface: '#f1f5f9',
-          border: '#e2e8f0',
-          dark: '#0f172a',
-          muted: '#64748b',
-          faint: '#94a3b8',
+        sage: {
+          bg: '#EEF3EE',
+          surface: '#F7F8F2',
+          sidebar: '#DCE7DF',
+          border: '#D8E2D9',
+          borderSubtle: '#E4ECE5',
+          hover: '#E8F0EA',
+          faint: '#E2EBE4',
         },
-        teal: {
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
+        brand: {
+          primary: '#176B5B',
+          light: '#DCEDE6',
+          dark: '#0E4B3F',
+          hover: '#13594B',
+        },
+        ink: {
+          main: '#26332F',
+          muted: '#68756F',
+          faint: '#8E9C95',
+          border: '#D8E2D9',
         },
         sentiment: {
-          pos: '#059669',
-          neg: '#dc2626',
-          neu: '#64748b',
+          pos: '#1F9D72',
+          neg: '#D95757',
+          neu: '#7A8793',
         }
-      },
-      fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
-        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       }
     },
   },

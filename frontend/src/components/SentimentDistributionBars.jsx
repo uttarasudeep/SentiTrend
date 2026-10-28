@@ -17,61 +17,58 @@ export default function SentimentDistributionBars({ summary }) {
       label: 'Positive',
       count: positive,
       percentage: posPct,
-      barColor: 'bg-emerald-600',
-      textColor: 'text-emerald-700',
-      badgeBg: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+      barColor: 'bg-[#1F9D72]',
+      badgeBg: 'bg-[#DCEDE6] text-[#176B5B] border-[#C1DFD3]',
     },
     {
       label: 'Negative',
       count: negative,
       percentage: negPct,
-      barColor: 'bg-red-600',
-      textColor: 'text-red-700',
-      badgeBg: 'bg-red-50 text-red-800 border-red-200',
+      barColor: 'bg-[#D95757]',
+      badgeBg: 'bg-[#FCE8E8] text-[#D95757] border-[#F7C5C5]',
     },
     {
       label: 'Neutral',
       count: neutral,
       percentage: neuPct,
-      barColor: 'bg-slate-500',
-      textColor: 'text-slate-700',
-      badgeBg: 'bg-slate-100 text-slate-800 border-slate-200',
+      barColor: 'bg-[#7A8793]',
+      badgeBg: 'bg-[#E6EBE8] text-[#55635E] border-[#D2DDD7]',
     },
   ];
 
   return (
-    <div className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm flex flex-col justify-between h-full">
+    <div className="bg-[#F7F8F2] border border-[#D8E2D9] rounded-xl p-5 shadow-xs flex flex-col justify-between h-full">
       <div>
         {/* Header */}
-        <div className="pb-4 border-b border-slate-100 mb-4">
-          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+        <div className="pb-4 border-b border-[#E4ECE5] mb-4">
+          <div className="text-[10px] font-bold text-[#68756F] uppercase tracking-wider">
             Polarity Distribution
           </div>
-          <h2 className="text-base font-bold text-slate-900 tracking-tight">
+          <h2 className="text-base font-bold text-[#26332F] tracking-tight">
             Sentiment Share
           </h2>
         </div>
 
         {/* Combined Segmented Bar */}
         <div className="mb-6">
-          <div className="text-xs text-slate-500 font-medium mb-1.5 flex justify-between">
+          <div className="text-xs text-[#68756F] font-semibold mb-1.5 flex justify-between">
             <span>Overall Proportion</span>
-            <span className="font-mono text-slate-400">{total} posts evaluated</span>
+            <span className="font-mono text-[#3D4C46]">{total} posts evaluated</span>
           </div>
-          <div className="h-3 w-full bg-slate-100 rounded-sm overflow-hidden flex">
+          <div className="h-3 w-full bg-[#E4ECE5] rounded-md overflow-hidden flex">
             <div
               style={{ width: `${posPct}%` }}
-              className="bg-emerald-600 transition-all duration-500"
+              className="bg-[#1F9D72] transition-all duration-500"
               title={`Positive: ${posPct}%`}
             />
             <div
               style={{ width: `${negPct}%` }}
-              className="bg-red-600 transition-all duration-500"
+              className="bg-[#D95757] transition-all duration-500"
               title={`Negative: ${negPct}%`}
             />
             <div
               style={{ width: `${neuPct}%` }}
-              className="bg-slate-400 transition-all duration-500"
+              className="bg-[#7A8793] transition-all duration-500"
               title={`Neutral: ${neuPct}%`}
             />
           </div>
@@ -82,22 +79,22 @@ export default function SentimentDistributionBars({ summary }) {
           {bars.map((item, idx) => (
             <div key={idx} className="space-y-1.5">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-semibold text-slate-800 flex items-center space-x-1.5">
+                <span className="font-bold text-[#26332F] flex items-center space-x-1.5">
                   <span className={`w-2 h-2 rounded-full ${item.barColor}`} />
                   <span>{item.label}</span>
                 </span>
                 <div className="flex items-center space-x-2 font-mono">
-                  <span className="text-slate-500">{item.count.toLocaleString()} posts</span>
-                  <span className={`px-1.5 py-0.5 rounded text-[11px] font-bold border ${item.badgeBg}`}>
+                  <span className="text-[#68756F] font-medium">{item.count.toLocaleString()} posts</span>
+                  <span className={`px-2 py-0.5 rounded text-[11px] font-bold border ${item.badgeBg}`}>
                     {item.percentage}%
                   </span>
                 </div>
               </div>
 
               {/* Progress bar */}
-              <div className="h-2 w-full bg-slate-100 rounded-sm overflow-hidden">
+              <div className="h-2.5 w-full bg-[#E4ECE5] rounded-md overflow-hidden">
                 <div
-                  className={`h-full ${item.barColor} rounded-sm transition-all duration-500`}
+                  className={`h-full ${item.barColor} rounded-md transition-all duration-500`}
                   style={{ width: `${item.percentage}%` }}
                 />
               </div>
@@ -107,9 +104,9 @@ export default function SentimentDistributionBars({ summary }) {
       </div>
 
       {/* Editorial footer summary */}
-      <div className="pt-4 border-t border-slate-100 mt-6 text-[11px] text-slate-400 flex items-center justify-between">
+      <div className="pt-4 border-t border-[#E4ECE5] mt-6 text-[11px] text-[#68756F] flex items-center justify-between">
         <span>VADER Polarity Threshold: ±0.05</span>
-        <span className="font-semibold text-slate-600">
+        <span className="font-bold text-[#176B5B]">
           Ratio: {(positive / (negative || 1)).toFixed(2)}:1 Pos/Neg
         </span>
       </div>
