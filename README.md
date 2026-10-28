@@ -1,51 +1,192 @@
+1. Project Overview
 
-# SentiTrend
+SentiTrend is a real-time sentiment analytics project that collects social media posts, classifies their sentiment, stores processed data, and generates analytics.
 
-SentiTrend is a big data project that aims to track sentiment shifts in conversations about trending topics using Reddit-style data and real-time stream processing.
+The project uses Bluesky Jetstream for data collection, Apache Kafka for message ingestion, Apache Spark for stream processing and analytics, VADER for sentiment analysis, and Apache HBase for storage.
 
-## Current Features
+2. Technology Stack
 
-- Sample conversational data stored in JSON format
-- Data reading and validation scripts
-- Python Kafka producer
-- Kafka topic named `reddit-raw`
-- Sample messages published to Kafka and verified with a consumer
+Python
 
-## Project Files
+Bluesky Jetstream
 
-- `sample_data.json` — sample conversation records
-- `read_data.py` — reads sample data
-- `validate_data.py` — validates sample data
-- `kafka_producer.py` — sends records to Kafka
-- `requirements.txt` — Python dependency list
-- `.gitignore` — excludes generated files and the virtual environment
+Apache Kafka
 
-## Prerequisites
+Apache Spark
 
-- Python installed
-- Java installed
-- Apache Kafka installed and configured
+VADER Sentiment Analysis
 
-## Setup
+Apache HBase
 
-Activate your Python virtual environment and install the dependencies:
+JSONL data storage
 
-```powershell
-python -m pip install -r requirements.txt
-```
+Python HTTP Server for the REST API
 
-Start your Kafka server in a separate terminal.
+Frontend dashboard (developed separately)
 
-## Run the Producer
+3. Project Architecture
 
-From the SentiTrend project folder, run:
+Bluesky Jetstream
+        |
+        v
+Python Data Collector
+        |
+        v
+Apache Kafka
+        |
+        v
+Spark Structured Streaming
+        |
+        v
+VADER Sentiment Analysis
+        |
+        v
+HBase + JSONL Storage
+        |
+        v
+Backend REST API
+        |
+        v
+Frontend Dashboard
 
-```powershell
-python kafka_producer.py
-```
+Batch analytics are performed using Spark RDD, Spark SQL, and Spark MLlib.
 
-The producer reads `sample_data.json` and sends each record to the Kafka topic `reddit-raw`.
+4. Backend API Setup
 
-## Important Note
+The backend API reads processed posts from:
 
-The current records are fictional sample data for development and testing. They are not live Reddit comments. Live Reddit data integration and sentiment analysis are future steps.
+data/processed_posts.jsonl
+
+Requirements
+
+Python 3
+
+The project's processed JSONL data file
+
+Kafka, Spark, and HBase are not required just to start the API when the processed data file is already available.
+
+Start the API
+
+From the project root, run:
+
+python api_server.py
+
+The API runs at:
+
+http://localhost:8000
+
+If you use a virtual environment, activate it before running the command.
+
+5. API Endpoints
+
+Method
+
+Endpoint
+
+Description
+
+GET
+
+/
+
+API information
+
+GET
+
+/health
+
+Health check
+
+GET
+
+/api/posts
+
+Retrieve processed posts
+
+GET
+
+/api/posts?limit=10
+
+Retrieve up to 10 posts
+
+GET
+
+/api/posts?sentiment=Positive
+
+Filter by sentiment
+
+GET
+
+/api/posts?topic=general
+
+Filter by topic
+
+GET
+
+/api/posts?limit=10&offset=0
+
+Paginated retrieval
+
+GET
+
+/api/sentiment/summary
+
+Sentiment statistics
+
+GET
+
+/api/sentiment/trends
+
+Daily sentiment trends
+
+GET
+
+/api/topics/summary
+
+Topic-wise statistics
+
+The filtering, pagination, trends, and topic analytics endpoints are available in the updated API implementation. Test them against your current data before relying on their output.
+
+6. Frontend Development
+
+The frontend can initially be developed using mock JSON data.
+
+Recommended dashboard components:
+
+Total posts summary
+
+Positive, negative, and neutral sentiment counts
+
+Sentiment distribution chart
+
+Sentiment trends chart
+
+Recent posts table
+
+Sentiment and topic filters
+
+Pagination
+
+Once the frontend and backend are ready, connect the frontend to the API.
+
+The API must be running on a machine accessible to the frontend. A local API on one developer's computer is not automatically accessible to another developer.
+
+7. Data Format
+
+Processed posts are stored in JSON Lines format, with one JSON object per line.
+
+An illustrative record is:
+
+{
+  "id": "post_001",
+  "uri": "at://example/post_001",
+  "text": "Today was wonderful!",
+  "platform": "bluesky",
+  "topic": "general",
+  "sentiment": "Positive",
+  "compound_score": 0.75,
+  "created_utc": "2026-10-28T13:30:00Z",
+  "collected_utc": "2026-10-28T13:31:00Z"
+}
+
+This example illustrates the expected structure. Actual field names and values should match the records produced by the data pipeline.
