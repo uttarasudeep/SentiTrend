@@ -181,19 +181,24 @@ export default function App() {
   const getTabTitle = () => {
     switch (activeTab) {
       case 'feed':
-        return 'Live Intelligence Feed';
+        return 'Live Social Wire';
       case 'sentiment':
-        return 'Sentiment Analytics';
+        return 'Sentiment Pulse';
       case 'topics':
-        return 'Topic Activity';
+        return 'Trending Channels';
       default:
-        return 'Overview';
+        return 'Live Overview';
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#EEF3EE] text-[#26332F] flex font-sans antialiased">
-      {/* Left Navigation Sidebar */}
+    <div className="min-h-screen bg-[#F1EEFF] text-[#24213A] flex font-sans antialiased relative overflow-x-hidden">
+      {/* Decorative ambient background accents */}
+      <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-radial from-[#D4C9FF]/25 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="fixed bottom-0 left-64 w-[400px] h-[400px] bg-radial from-[#12B8B0]/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="fixed top-1/2 right-1/4 w-[350px] h-[350px] bg-radial from-[#FF5C69]/08 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+
+      {/* Left Deep Violet Sidebar */}
       <Sidebar
         activeTab={activeTab}
         onSelectTab={(tab) => setActiveTab(tab)}
@@ -205,7 +210,7 @@ export default function App() {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 lg:pl-64">
-        {/* Editorial Top Bar */}
+        {/* Top Header */}
         <TopBar
           activeTabTitle={getTabTitle()}
           isMock={isMock}
@@ -223,6 +228,18 @@ export default function App() {
           {/* Error Banner */}
           {error && <ErrorState error={error} onRetry={loadData} />}
 
+          {/* Greeting Banner */}
+          {(activeTab === 'overview') && (
+            <div className="pb-2">
+              <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#5B3CC4] block">
+                Social Stream Monitoring
+              </span>
+              <p className="text-sm font-semibold text-[#6F6A85] mt-0.5">
+                Here's what's happening across the social stream in real time.
+              </p>
+            </div>
+          )}
+
           {/* 1. Summary Metrics Band */}
           {(activeTab === 'overview' || activeTab === 'sentiment') && (
             <section aria-label="Summary KPIs">
@@ -230,7 +247,7 @@ export default function App() {
             </section>
           )}
 
-          {/* 2. Visual Analytics Grid: Sentiment Trend (Financial Line) + Distribution Bars (Option A) */}
+          {/* 2. Visual Analytics Grid: Sentiment Pulse (Area/Line) + Distribution Bars */}
           {(activeTab === 'overview' || activeTab === 'sentiment') && (
             <section
               aria-label="Sentiment Time Series and Distribution"
@@ -238,7 +255,7 @@ export default function App() {
             >
               <div className="lg:col-span-7">
                 {loading && !trends ? (
-                  <PanelSkeleton title="Generating Sentiment Frequency Curve..." />
+                  <PanelSkeleton title="Measuring Sentiment Frequency Trajectory..." />
                 ) : (
                   <SentimentTrendChart trendsData={trends} />
                 )}
@@ -246,7 +263,7 @@ export default function App() {
 
               <div className="lg:col-span-5">
                 {loading && !summary ? (
-                  <PanelSkeleton title="Computing Polarity Distribution..." />
+                  <PanelSkeleton title="Calculating Polarity Proportions..." />
                 ) : (
                   <SentimentDistributionBars summary={summary} />
                 )}
@@ -259,11 +276,11 @@ export default function App() {
             aria-label="Topics and Feed Breakdown"
             className="grid grid-cols-1 lg:grid-cols-12 gap-6"
           >
-            {/* Topic Activity Ranking (Option A list) */}
+            {/* Trending Topics (Left column in overview, full in topics tab) */}
             {(activeTab === 'overview' || activeTab === 'topics') && (
               <div className={activeTab === 'topics' ? 'lg:col-span-12' : 'lg:col-span-5'}>
                 {loading && !topicSummary ? (
-                  <PanelSkeleton title="Ranking Topic Volume..." />
+                  <PanelSkeleton title="Ranking Trending Channels..." />
                 ) : (
                   <TopicRankedList
                     topicsData={topicSummary}
@@ -276,7 +293,7 @@ export default function App() {
               </div>
             )}
 
-            {/* Live Intelligence Feed + Compact Filters + Pagination */}
+            {/* Live Social Activity Feed + Filter Bar + Pagination */}
             {(activeTab === 'overview' || activeTab === 'feed') && (
               <div className={activeTab === 'feed' ? 'lg:col-span-12' : 'lg:col-span-7'}>
                 <div className="space-y-3">
@@ -318,13 +335,13 @@ export default function App() {
           </section>
         </main>
 
-        {/* Minimal Editorial Footer */}
-        <footer className="mt-auto border-t border-[#D8E2D9] bg-[#DCE7DF]/60 py-4 px-6 text-xs text-[#68756F]">
+        {/* Minimal Footer */}
+        <footer className="mt-auto border-t border-[#E3DCFC] bg-white/70 backdrop-blur-xs py-4 px-6 text-xs text-[#6F6A85]">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
             <div>
-              <span className="font-bold text-[#26332F]">SentiTrend</span> &bull; Editorial Social Intelligence Dashboard
+              <span className="font-extrabold text-[#5B3CC4]">SentiTrend</span> &bull; Vibrant Social Pulse Intelligence
             </div>
-            <div className="text-[11px] text-[#68756F] font-mono">
+            <div className="text-[11px] text-[#6F6A85] font-mono font-semibold">
               Pipeline: Bluesky &rarr; Kafka &rarr; Spark Streaming &rarr; VADER &rarr; HBase
             </div>
           </div>

@@ -1,24 +1,16 @@
-# SentiTrend — Modern Editorial Social Intelligence Dashboard
+# SentiTrend — Vibrant Social Pulse Dashboard
 
-A modern, information-dense, newsroom-style sentiment analytics platform for real-time social streams.
+A high-energy, modern social-media sentiment intelligence dashboard for real-time stream processing.
 
-Redesigned with a **Modern Editorial Social Intelligence** design language: clean off-white background, crisp charcoal typography, left sidebar navigation, horizontal sentiment share distribution bars, financial-grade sentiment frequency line charts, ranked topic activity list, and live intelligence wire feed.
+Redesigned with the **Vibrant Social Pulse** identity:
+- **Canvas:** Vibrant soft lavender/periwinkle background (`#F1EEFF`) with subtle ambient depth shapes
+- **Sidebar:** Deep violet / plum (`#5B3CC4`) with electric turquoise active highlights and live status indicators
+- **Surfaces:** Crisp white cards (`#FFFFFF`) with soft periwinkle borders (`#E3DCFC`) and gentle hover lifts
+- **4-Color System:** Deep Violet (`#5B3CC4`), Electric Turquoise (`#12B8B0`), Coral (`#FF5C69`), and Warm Yellow (`#FFC857`)
+- **Typography:** Plus Jakarta Sans applied globally across headings, metrics, tables, and tooltips
+- **Asymmetric Composition:** Dominant **SENTIMENT PULSE** temporal trajectory chart, **SENTIMENT SHARE** proportional bars, **TRENDING TOPICS** channel virality rankings, and **RECENT SOCIAL ACTIVITY** live wire cards
 
 Built with **React**, **Vite**, **Tailwind CSS**, and **Recharts**.
-
----
-
-## 🎨 New Design Architecture
-
-* **Layout:** Persistent left sidebar navigation (`Overview`, `Live Posts`, `Sentiment`, `Topics`) + responsive collapsible drawer for mobile.
-* **Header / Top Bar:** Editorial breadcrumb (`SentiTrend / Overview`), live sync clock, mode switch (`Mock` / `Live:8000`), evaluation error simulator, and refresh control.
-* **Summary Metrics:** Editorial KPI band with thin accent borders (`Total Posts`, `Positive Sentiment`, `Negative Sentiment`, `Neutral Sentiment`, `Avg Polarity Score`).
-* **Sentiment Frequency Over Time:** Financial-grade line chart featuring positive (emerald), negative (red), and neutral (slate) trajectories with a `24H | 7D | 30D` range selector.
-* **Sentiment Distribution (Option A):** Horizontal sentiment ratio bars with exact percentages, counts, and a composite 100% proportional benchmark bar.
-* **Topic Activity Ranking:** Newsroom-style trending topics list ranked by post volume with relative activity bars and dominant sentiment indicators. Clicking any topic instantly filters the live feed!
-* **Live Intelligence Wire:** Editorial feed/list displaying sentiment status dots, post excerpts (expandable for full text), topic tags, timestamps, and VADER scores.
-* **Toolbar & Pagination:** Compact toolbar filters (`All Sentiments`, `All Topics`, keyword search) and clean, numbered pagination controls.
-* **Dual-Mode Data Layer:** Seamlessly toggles between local mock data and the live streaming backend (`api_server.py`) at `http://localhost:8000`.
 
 ---
 

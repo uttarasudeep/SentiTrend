@@ -16,11 +16,11 @@ export default function Pagination({
   const isLastPage = currentPage >= totalPages;
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 bg-[#F7F8F2] border border-[#D8E2D9] rounded-xl mt-3 text-xs shadow-2xs">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-5 py-3.5 bg-white border border-[#E3DCFC] rounded-2xl mt-4 text-xs shadow-card">
       {/* Range text */}
-      <div className="text-[#68756F] font-mono text-[11px]">
-        Showing <span className="font-bold text-[#26332F]">{startItem}–{endItem}</span> of{' '}
-        <span className="font-bold text-[#26332F]">{totalItems}</span> posts
+      <div className="text-[#6F6A85] font-mono text-[11px] font-semibold">
+        Showing <span className="font-bold text-[#24213A]">{startItem}–{endItem}</span> of{' '}
+        <span className="font-bold text-[#24213A]">{totalItems}</span> posts
       </div>
 
       {/* Pagination controls */}
@@ -28,7 +28,7 @@ export default function Pagination({
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={isFirstPage}
-          className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-lg border border-[#D8E2D9] text-[#26332F] bg-[#EEF3EE] hover:bg-[#E4ECE5] disabled:opacity-40 disabled:cursor-not-allowed font-semibold transition-colors"
+          className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-xl border border-[#E3DCFC] text-[#24213A] bg-[#F9F7FF] hover:bg-[#EDE8FF] disabled:opacity-40 disabled:cursor-not-allowed font-bold transition-colors"
         >
           <ChevronLeft className="w-3.5 h-3.5" />
           <span>Previous</span>
@@ -51,14 +51,14 @@ export default function Pagination({
               return (
                 <React.Fragment key={p}>
                   {showEllipsis && (
-                    <span className="text-[#68756F] px-1 font-mono">...</span>
+                    <span className="text-[#B6A3FC] px-1 font-mono font-bold">...</span>
                   )}
                   <button
                     onClick={() => onPageChange(p)}
-                    className={`w-7 h-7 rounded-lg text-xs font-bold transition-colors ${
+                    className={`w-7 h-7 rounded-xl text-xs font-black transition-all ${
                       currentPage === p
-                        ? 'bg-[#176B5B] text-white shadow-2xs'
-                        : 'border border-[#D8E2D9] bg-[#EEF3EE] text-[#26332F] hover:bg-[#E4ECE5]'
+                        ? 'bg-[#5B3CC4] text-white shadow-md shadow-[#5B3CC4]/30'
+                        : 'border border-[#E3DCFC] bg-[#F9F7FF] text-[#24213A] hover:bg-[#EDE8FF]'
                     }`}
                   >
                     {p}
@@ -71,7 +71,7 @@ export default function Pagination({
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={isLastPage}
-          className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-lg border border-[#D8E2D9] text-[#26332F] bg-[#EEF3EE] hover:bg-[#E4ECE5] disabled:opacity-40 disabled:cursor-not-allowed font-semibold transition-colors"
+          className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-xl border border-[#E3DCFC] text-[#24213A] bg-[#F9F7FF] hover:bg-[#EDE8FF] disabled:opacity-40 disabled:cursor-not-allowed font-bold transition-colors"
         >
           <span>Next</span>
           <ChevronRight className="w-3.5 h-3.5" />

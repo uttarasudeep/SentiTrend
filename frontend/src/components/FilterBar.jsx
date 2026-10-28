@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, RotateCcw } from 'lucide-react';
+import { Search, RotateCcw, Filter } from 'lucide-react';
 
 export default function FilterBar({
   selectedSentiment,
@@ -18,34 +18,35 @@ export default function FilterBar({
     selectedSentiment !== 'All' || selectedTopic !== 'All' || searchQuery.trim() !== '';
 
   return (
-    <div className="bg-[#F7F8F2] border border-[#D8E2D9] rounded-xl p-3.5 shadow-2xs mb-3">
+    <div className="bg-white border border-[#E3DCFC] rounded-2xl p-4 shadow-card mb-4">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         {/* Search Input */}
         <div className="relative flex-1 max-w-sm">
-          <Search className="w-3.5 h-3.5 text-[#68756F] absolute left-3 top-1/2 transform -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#6F6A85] absolute left-3.5 top-1/2 transform -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search stream comments or topics..."
+            placeholder="Search keywords or topics..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full bg-[#EEF3EE] border border-[#D8E2D9] rounded-lg pl-8 pr-3 py-1.5 text-xs text-[#26332F] placeholder-[#68756F] focus:outline-none focus:ring-1 focus:ring-[#176B5B] focus:border-[#176B5B]"
+            className="w-full bg-[#F9F7FF] border border-[#E3DCFC] rounded-xl pl-9 pr-3.5 py-2 text-xs font-semibold text-[#24213A] placeholder-[#6F6A85] focus:outline-none focus:ring-2 focus:ring-[#5B3CC4]/40 focus:border-[#5B3CC4]"
           />
         </div>
 
         {/* Compact Filters & Reset */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <span className="text-[10px] font-extrabold text-[#6F6A85] uppercase tracking-wider mr-1 hidden sm:inline">
+            Filter by:
+          </span>
+
           {/* Sentiment Filter Dropdown */}
-          <div className="flex items-center space-x-1.5 bg-[#EEF3EE] border border-[#D8E2D9] rounded-lg px-2.5 py-1.5 text-xs">
-            <span className="text-[#68756F] text-[10px] font-bold uppercase tracking-wider">
-              Sentiment:
-            </span>
+          <div className="flex items-center space-x-1.5 bg-[#F9F7FF] border border-[#E3DCFC] rounded-xl px-3 py-1.5 text-xs">
             <select
               value={selectedSentiment}
               onChange={(e) => onSelectSentiment(e.target.value)}
-              className="bg-transparent text-[#26332F] font-bold focus:outline-none cursor-pointer text-xs"
+              className="bg-transparent text-[#24213A] font-extrabold focus:outline-none cursor-pointer text-xs"
             >
               {sentiments.map((s) => (
-                <option key={s} value={s} className="bg-[#F7F8F2] text-[#26332F]">
+                <option key={s} value={s} className="bg-white text-[#24213A]">
                   {s === 'All' ? 'All Sentiments' : s}
                 </option>
               ))}
@@ -53,39 +54,36 @@ export default function FilterBar({
           </div>
 
           {/* Topic Filter Dropdown */}
-          <div className="flex items-center space-x-1.5 bg-[#EEF3EE] border border-[#D8E2D9] rounded-lg px-2.5 py-1.5 text-xs">
-            <span className="text-[#68756F] text-[10px] font-bold uppercase tracking-wider">
-              Topic:
-            </span>
+          <div className="flex items-center space-x-1.5 bg-[#F9F7FF] border border-[#E3DCFC] rounded-xl px-3 py-1.5 text-xs">
             <select
               value={selectedTopic}
               onChange={(e) => onSelectTopic(e.target.value)}
-              className="bg-transparent text-[#26332F] font-bold focus:outline-none cursor-pointer text-xs"
+              className="bg-transparent text-[#24213A] font-extrabold focus:outline-none cursor-pointer text-xs"
             >
-              <option value="All" className="bg-[#F7F8F2] text-[#26332F]">All Topics</option>
+              <option value="All" className="bg-white text-[#24213A]">All Topics</option>
               {topicsList.map((t) => (
-                <option key={t} value={t} className="bg-[#F7F8F2] text-[#26332F]">
+                <option key={t} value={t} className="bg-white text-[#24213A]">
                   #{t}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Reset Filters button */}
+          {/* Clear Filters Button */}
           {hasActiveFilters && (
             <button
               onClick={onResetFilters}
-              className="inline-flex items-center space-x-1 text-xs text-[#D95757] hover:text-[#B83E3E] font-bold px-2 py-1.5 rounded-lg hover:bg-[#FCE8E8] transition-colors"
+              className="inline-flex items-center space-x-1 text-xs text-[#FF5C69] hover:text-[#D73543] font-bold px-2.5 py-1.5 rounded-xl hover:bg-[#FFE9EB] transition-colors"
               title="Reset all active filters"
             >
-              <RotateCcw className="w-3 h-3" />
-              <span>Reset</span>
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Clear Filters</span>
             </button>
           )}
 
           {/* Filtered count badge */}
-          <div className="text-xs text-[#68756F] ml-auto font-mono">
-            Filtered: <span className="font-bold text-[#26332F]">{totalFiltered}</span> posts
+          <div className="text-xs text-[#6F6A85] ml-auto font-mono font-bold">
+            Matches: <span className="text-[#5B3CC4] font-black">{totalFiltered}</span>
           </div>
         </div>
       </div>
