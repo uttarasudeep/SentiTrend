@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import Header from './components/Header';
-import SummaryCards from './components/SummaryCards';
-import SentimentDistributionChart from './components/SentimentDistributionChart';
+import Sidebar from './components/Sidebar';
+import TopBar from './components/TopBar';
+import SummaryMetrics from './components/SummaryMetrics';
 import SentimentTrendChart from './components/SentimentTrendChart';
-import TopicAnalyticsChart from './components/TopicAnalyticsChart';
+import SentimentDistributionBars from './components/SentimentDistributionBars';
+import TopicRankedList from './components/TopicRankedList';
 import FilterBar from './components/FilterBar';
-import RecentPostsTable from './components/RecentPostsTable';
+import RecentPostsFeed from './components/RecentPostsFeed';
 import Pagination from './components/Pagination';
-import {
-  SummaryCardsSkeleton,
-  ChartSkeleton,
-  TableSkeleton,
-} from './components/LoadingState';
+import { MetricsSkeleton, PanelSkeleton, FeedSkeleton } from './components/LoadingState';
 import ErrorState from './components/ErrorState';
 
 import {
@@ -27,7 +24,11 @@ import {
 } from './services/api';
 
 export default function App() {
-  // Application Data States
+  // Navigation & Layout state
+  const [activeTab, setActiveTab] = useState('overview');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Data states
   const [health, setHealth] = useState(null);
   const [summary, setSummary] = useState(null);
   const [trends, setTrends] = useState(null);
@@ -35,23 +36,23 @@ export default function App() {
   const [allPosts, setAllPosts] = useState([]);
   const [totalFiltered, setTotalFiltered] = useState(0);
 
-  // UI Control States
+  // Status & Control states
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isMock, setIsMock] = useState(getMockMode());
   const [isSimulatingError, setIsSimulatingError] = useState(getSimulateError());
 
-  // Filter States
+  // Filter & Search states
   const [selectedSentiment, setSelectedSentiment] = useState('All');
   const [selectedTopic, setSelectedTopic] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Pagination State
+  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
-  // Load Dashboard Data
+  // Load dashboard data
   const loadData = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -73,7 +74,7 @@ export default function App() {
       setLastUpdated(new Date());
     } catch (err) {
       console.error('SentiTrend load error:', err);
-      setError(err.message || 'Failed to load streaming analytics data.');
+      setError(err.message || 'Failed to connect to SentiTrend streaming service.');
     } finally {
       setLoading(false);
     }
@@ -83,21 +84,21 @@ export default function App() {
     loadData();
   }, [loadData]);
 
-  // Dynamically derive unique topics list from topic summary and posts
+  // Derive available topics dynamically
   const dynamicTopics = useMemo(() => {
-    const topicsSet = new Set();
+    const set = new Set();
     if (topicSummary?.topics) {
       topicSummary.topics.forEach((t) => {
-        if (t.topic) topicsSet.add(t.topic.toLowerCase());
+        if (t.topic) set.add(t.topic.toLowerCase());
       });
     }
     allPosts.forEach((p) => {
-      if (p.topic) topicsSet.add(p.topic.toLowerCase());
+      if (p.topic) set.add(p.topic.toLowerCase());
     });
-    return Array.from(topicsSet).sort();
+    return Array.from(set).sort();
   }, [topicSummary, allPosts]);
 
-  // Client-side filtering & search on the fetched dataset
+  // Filter posts
   const filteredPosts = useMemo(() => {
     return allPosts.filter((post) => {
       // Sentiment filter
@@ -116,7 +117,7 @@ export default function App() {
         return false;
       }
 
-      // Text keyword search
+      // Keyword search
       if (searchQuery.trim() !== '') {
         const query = searchQuery.toLowerCase();
         const matchesText = post.text?.toLowerCase().includes(query);
@@ -134,12 +135,11 @@ export default function App() {
     return filteredPosts.slice(start, start + pageSize);
   }, [filteredPosts, currentPage, pageSize]);
 
-  // Keep totalFiltered updated
   useEffect(() => {
     setTotalFiltered(filteredPosts.length);
   }, [filteredPosts]);
 
-  // Reset page to 1 when filters change
+  // Filter Handlers
   const handleSelectSentiment = (sentiment) => {
     setSelectedSentiment(sentiment);
     setCurrentPage(1);
@@ -162,126 +162,174 @@ export default function App() {
     setCurrentPage(1);
   };
 
-  // Toggle Mock vs Live
+  // Dual-mode toggle
   const handleToggleMock = () => {
-    const newMock = !isMock;
-    setIsMock(newMock);
-    setMockMode(newMock);
+    const nextMock = !isMock;
+    setIsMock(nextMock);
+    setMockMode(nextMock);
     loadData();
   };
 
-  // Toggle Error simulation
+  // Evaluation error toggle
   const handleToggleSimulateError = () => {
-    const newErr = !isSimulatingError;
-    setIsSimulatingError(newErr);
-    setSimulateError(newErr);
+    const nextErr = !isSimulatingError;
+    setIsSimulatingError(nextErr);
+    setSimulateError(nextErr);
     loadData();
+  };
+
+  const getTabTitle = () => {
+    switch (activeTab) {
+      case 'feed':
+        return 'Live Intelligence Feed';
+      case 'sentiment':
+        return 'Sentiment Analytics';
+      case 'topics':
+        return 'Topic Activity';
+      default:
+        return 'Overview';
+    }
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
-      {/* Header Bar */}
-      <Header
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex font-sans antialiased">
+      {/* Left Navigation Sidebar */}
+      <Sidebar
+        activeTab={activeTab}
+        onSelectTab={(tab) => setActiveTab(tab)}
         health={health}
         isMock={isMock}
-        onToggleMock={handleToggleMock}
-        isSimulatingError={isSimulatingError}
-        onToggleSimulateError={handleToggleSimulateError}
-        onRefresh={loadData}
-        loading={loading}
-        lastUpdated={lastUpdated}
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
       />
 
-      {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
-        {/* Error Notification with Retry */}
-        {error && <ErrorState error={error} onRetry={loadData} />}
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0 lg:pl-64">
+        {/* Editorial Top Bar */}
+        <TopBar
+          activeTabTitle={getTabTitle()}
+          isMock={isMock}
+          onToggleMock={handleToggleMock}
+          isSimulatingError={isSimulatingError}
+          onToggleSimulateError={handleToggleSimulateError}
+          onRefresh={loadData}
+          loading={loading}
+          lastUpdated={lastUpdated}
+          onOpenSidebar={() => setIsSidebarOpen(true)}
+        />
 
-        {/* 1. Summary Cards Section */}
-        <section aria-label="Sentiment Summary KPI Cards">
-          {loading && !summary ? (
-            <SummaryCardsSkeleton />
-          ) : (
-            <SummaryCards summary={summary} />
+        {/* Dashboard Body */}
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6">
+          {/* Error Banner */}
+          {error && <ErrorState error={error} onRetry={loadData} />}
+
+          {/* 1. Summary Metrics Band */}
+          {(activeTab === 'overview' || activeTab === 'sentiment') && (
+            <section aria-label="Summary KPIs">
+              {loading && !summary ? <MetricsSkeleton /> : <SummaryMetrics summary={summary} />}
+            </section>
           )}
-        </section>
 
-        {/* 2. Visual Analytics Section: Distribution + Trends */}
-        <section
-          aria-label="Visual Analytics Charts"
-          className="grid grid-cols-1 lg:grid-cols-12 gap-6"
-        >
-          {/* Sentiment Distribution (Donut Chart) */}
-          <div className="lg:col-span-5">
-            {loading && !summary ? (
-              <ChartSkeleton title="Loading Distribution..." />
-            ) : (
-              <SentimentDistributionChart summary={summary} />
+          {/* 2. Visual Analytics Grid: Sentiment Trend (Financial Line) + Distribution Bars (Option A) */}
+          {(activeTab === 'overview' || activeTab === 'sentiment') && (
+            <section
+              aria-label="Sentiment Time Series and Distribution"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-6"
+            >
+              <div className="lg:col-span-7">
+                {loading && !trends ? (
+                  <PanelSkeleton title="Generating Sentiment Frequency Curve..." />
+                ) : (
+                  <SentimentTrendChart trendsData={trends} />
+                )}
+              </div>
+
+              <div className="lg:col-span-5">
+                {loading && !summary ? (
+                  <PanelSkeleton title="Computing Polarity Distribution..." />
+                ) : (
+                  <SentimentDistributionBars summary={summary} />
+                )}
+              </div>
+            </section>
+          )}
+
+          {/* 3. Topics and Live Feed Row */}
+          <section
+            aria-label="Topics and Feed Breakdown"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6"
+          >
+            {/* Topic Activity Ranking (Option A list) */}
+            {(activeTab === 'overview' || activeTab === 'topics') && (
+              <div className={activeTab === 'topics' ? 'lg:col-span-12' : 'lg:col-span-5'}>
+                {loading && !topicSummary ? (
+                  <PanelSkeleton title="Ranking Topic Volume..." />
+                ) : (
+                  <TopicRankedList
+                    topicsData={topicSummary}
+                    onSelectTopic={(t) => {
+                      handleSelectTopic(t);
+                      if (activeTab === 'topics') setActiveTab('feed');
+                    }}
+                  />
+                )}
+              </div>
             )}
-          </div>
 
-          {/* Sentiment Trends Over Time (Area Chart) */}
-          <div className="lg:col-span-7">
-            {loading && !trends ? (
-              <ChartSkeleton title="Loading Trends Curve..." />
-            ) : (
-              <SentimentTrendChart trendsData={trends} />
+            {/* Live Intelligence Feed + Compact Filters + Pagination */}
+            {(activeTab === 'overview' || activeTab === 'feed') && (
+              <div className={activeTab === 'feed' ? 'lg:col-span-12' : 'lg:col-span-7'}>
+                <div className="space-y-3">
+                  <FilterBar
+                    selectedSentiment={selectedSentiment}
+                    onSelectSentiment={handleSelectSentiment}
+                    selectedTopic={selectedTopic}
+                    onSelectTopic={handleSelectTopic}
+                    searchQuery={searchQuery}
+                    onSearchChange={handleSearchChange}
+                    topicsList={dynamicTopics}
+                    onResetFilters={handleResetFilters}
+                    totalFiltered={totalFiltered}
+                  />
+
+                  {loading && allPosts.length === 0 ? (
+                    <FeedSkeleton />
+                  ) : (
+                    <>
+                      <RecentPostsFeed
+                        posts={paginatedPosts}
+                        loading={loading}
+                        totalFiltered={totalFiltered}
+                      />
+
+                      {totalFiltered > 0 && (
+                        <Pagination
+                          currentPage={currentPage}
+                          pageSize={pageSize}
+                          totalItems={totalFiltered}
+                          onPageChange={(page) => setCurrentPage(page)}
+                        />
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
             )}
+          </section>
+        </main>
+
+        {/* Minimal Editorial Footer */}
+        <footer className="mt-auto border-t border-slate-200 bg-white py-4 px-6 text-xs text-slate-500">
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div>
+              <span className="font-semibold text-slate-800">SentiTrend</span> &bull; Editorial Social Intelligence Dashboard
+            </div>
+            <div className="text-[11px] text-slate-400 font-mono">
+              Pipeline: Bluesky &rarr; Kafka &rarr; Spark Streaming &rarr; VADER &rarr; HBase
+            </div>
           </div>
-        </section>
-
-        {/* 3. Topic Analytics Section */}
-        <section aria-label="Topic Analytics">
-          {loading && !topicSummary ? (
-            <ChartSkeleton title="Loading Topic Analytics..." />
-          ) : (
-            <TopicAnalyticsChart topicsData={topicSummary} />
-          )}
-        </section>
-
-        {/* 4. Filterable & Paginated Posts Feed Table */}
-        <section aria-label="Recent Social Posts Feed" className="space-y-4">
-          <FilterBar
-            selectedSentiment={selectedSentiment}
-            onSelectSentiment={handleSelectSentiment}
-            selectedTopic={selectedTopic}
-            onSelectTopic={handleSelectTopic}
-            searchQuery={searchQuery}
-            onSearchChange={handleSearchChange}
-            topicsList={dynamicTopics}
-            onResetFilters={handleResetFilters}
-            totalFiltered={totalFiltered}
-          />
-
-          {loading && allPosts.length === 0 ? (
-            <TableSkeleton />
-          ) : (
-            <>
-              <RecentPostsTable posts={paginatedPosts} loading={loading} />
-              {totalFiltered > 0 && (
-                <Pagination
-                  currentPage={currentPage}
-                  pageSize={pageSize}
-                  totalItems={totalFiltered}
-                  onPageChange={(page) => setCurrentPage(page)}
-                />
-              )}
-            </>
-          )}
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-slate-900 border-t border-slate-800/80 py-5 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p>
-            SentiTrend &copy; 2026 &bull; Real-time Streaming Sentiment Analytics
-          </p>
-          <p className="text-slate-400">
-            Powered by Bluesky Jetstream, Kafka, Spark Structured Streaming, VADER & HBase
-          </p>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 }

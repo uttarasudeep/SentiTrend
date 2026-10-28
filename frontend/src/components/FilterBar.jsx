@@ -1,5 +1,5 @@
 import React from 'react';
-import { Filter, Search, RotateCcw } from 'lucide-react';
+import { Search, RotateCcw, Filter } from 'lucide-react';
 
 export default function FilterBar({
   selectedSentiment,
@@ -18,53 +18,53 @@ export default function FilterBar({
     selectedSentiment !== 'All' || selectedTopic !== 'All' || searchQuery.trim() !== '';
 
   return (
-    <div className="bg-slate-900/70 border border-slate-800 p-4 rounded-2xl shadow-sm mb-4">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        {/* Search bar */}
-        <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+    <div className="bg-white border border-slate-200 rounded-lg p-3 shadow-xs mb-4">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        {/* Search Input */}
+        <div className="relative flex-1 max-w-sm">
+          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search posts by keyword..."
+            placeholder="Search keywords or topics..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full bg-slate-800/80 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
+            className="w-full bg-slate-50 border border-slate-200 rounded pl-8 pr-3 py-1.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-teal-700 focus:border-teal-700"
           />
         </div>
 
-        {/* Dropdown Filters & Reset */}
-        <div className="flex flex-wrap items-center gap-3">
-          {/* Sentiment Filter */}
-          <div className="flex items-center space-x-1.5 bg-slate-800/70 border border-slate-700/80 rounded-xl px-3 py-1.5">
-            <Filter className="w-3.5 h-3.5 text-slate-400" />
-            <label className="text-xs text-slate-400 font-medium mr-1">Sentiment:</label>
+        {/* Compact Filters & Reset */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Sentiment Filter Dropdown */}
+          <div className="flex items-center space-x-1.5 bg-slate-50 border border-slate-200 rounded px-2.5 py-1.5 text-xs">
+            <span className="text-slate-400 text-[11px] font-medium uppercase tracking-wider">
+              Sentiment:
+            </span>
             <select
               value={selectedSentiment}
               onChange={(e) => onSelectSentiment(e.target.value)}
-              className="bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer"
+              className="bg-transparent text-slate-900 font-semibold focus:outline-none cursor-pointer text-xs"
             >
               {sentiments.map((s) => (
-                <option key={s} value={s} className="bg-slate-900 text-white">
-                  {s}
+                <option key={s} value={s}>
+                  {s === 'All' ? 'All Sentiments' : s}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Topic Filter */}
-          <div className="flex items-center space-x-1.5 bg-slate-800/70 border border-slate-700/80 rounded-xl px-3 py-1.5">
-            <span className="text-xs text-indigo-400 font-bold">#</span>
-            <label className="text-xs text-slate-400 font-medium mr-1">Topic:</label>
+          {/* Topic Filter Dropdown */}
+          <div className="flex items-center space-x-1.5 bg-slate-50 border border-slate-200 rounded px-2.5 py-1.5 text-xs">
+            <span className="text-slate-400 text-[11px] font-medium uppercase tracking-wider">
+              Topic:
+            </span>
             <select
               value={selectedTopic}
               onChange={(e) => onSelectTopic(e.target.value)}
-              className="bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer"
+              className="bg-transparent text-slate-900 font-semibold focus:outline-none cursor-pointer text-xs"
             >
-              <option value="All" className="bg-slate-900 text-white">
-                All Topics
-              </option>
+              <option value="All">All Topics</option>
               {topicsList.map((t) => (
-                <option key={t} value={t} className="bg-slate-900 text-white">
+                <option key={t} value={t}>
                   #{t}
                 </option>
               ))}
@@ -75,16 +75,17 @@ export default function FilterBar({
           {hasActiveFilters && (
             <button
               onClick={onResetFilters}
-              className="flex items-center space-x-1.5 text-xs text-rose-400 hover:text-rose-300 font-medium px-2.5 py-1.5 rounded-lg hover:bg-rose-500/10 transition-colors"
+              className="inline-flex items-center space-x-1 text-xs text-slate-600 hover:text-red-700 font-medium px-2 py-1.5 rounded hover:bg-slate-100 transition-colors"
+              title="Reset all active filters"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
+              <RotateCcw className="w-3 h-3" />
               <span>Reset</span>
             </button>
           )}
 
           {/* Filtered count badge */}
-          <div className="text-xs text-slate-400 ml-auto font-medium">
-            Found <span className="text-white font-bold">{totalFiltered}</span> matching posts
+          <div className="text-xs text-slate-400 ml-auto font-mono">
+            Filtered: <span className="font-bold text-slate-800">{totalFiltered}</span> posts
           </div>
         </div>
       </div>
